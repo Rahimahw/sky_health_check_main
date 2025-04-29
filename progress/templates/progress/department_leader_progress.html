@@ -1,0 +1,152 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Department Progress Dashboard</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="report-container">
+  <h2>Department Summary - {{ selected_department.departmentName }}</h2>
+
+  <form method="get" id="filters-form">
+    <label for="session">Session:</label>
+    <select name="session" id="session" onchange="document.getElementById('filters-form').submit();">
+      {% for s in sessions %}
+        <option value="{{ s.id }}" {% if selected_session and s.id == selected_session.id %}selected{% endif %}>
+          {{ s.sessionName }} - {{ s.sessionDate }}
+        </option>
+      {% endfor %}
+    </select>
+
+    <label for="department">Department:</label>
+    <select name="department" id="department" onchange="document.getElementById('filters-form').submit();">
+      {% for d in departments %}
+        <option value="{{ d.id }}" {% if selected_department and d.id == selected_department.id %}selected{% endif %}>
+          {{ d.departmentName }}
+        </option>
+      {% endfor %}
+    </select>
+    <label for="team">Team:</label>
+    <select name="team" id="team" onchange="document.getElementById('filters-form').submit();">
+      <option value="">All Teams</option>
+      {% for t in teams %}
+        <option value="{{ t.id }}" {% if selected_team and t.id == selected_team.id %}selected{% endif %}>
+          {{ t.teamName }}
+        </option>
+      {% endfor %}
+    </select>
+
+  </form>
+  {% if show_chart %}
+    <canvas id="departmentChart" width="400" height="300"></canvas>
+  {% endif %}
+
+  <!-- 🟢 Always show the detailed team-based section -->
+  <div class="card-section">
+    {% for item in report %}
+      <div class="card-box">
+        <h3>{{ item.card }}</h3>
+        <p><strong>Team:</strong> {{ item.team }}</p>
+        <p><strong>Green:</strong> {{ item.green }}</p>
+        <p><strong>Amber:</strong> {{ item.amber }}</p>
+        <p><strong>Red:</strong> {{ item.red }}</p>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    {% if has_previous %}
+      <a href="?session={{ selected_session.id }}&department={{ selected_department.id }}&team={{ selected_team.id }}&page={{ page_number|add:'-1' }}" class="nav-button">Previous</a>
+    {% endif %}
+    <span></span>
+    {% if has_next %}
+      <a href="?session={{ selected_session.id }}&department={{ selected_department.id }}&team={{ selected_team.id }}&page={{ page_number|add:'1' }}" class="nav-button">Next</a>
+    {% endif %}
+  </div>
+
+  <!-- 🔹 Summary for OTHER departments only -->
+  {% if not is_own_department %}
+    <h3>Summary for {{ selected_department.departmentName }}</h3>
+    <div class="card-section">
+      {% for item in summary_report %}
+        <div class="card-box">
+          <h3>{{ item.card }}</h3>
+          <p><strong>Green Total:</strong> {{ item.green }}</p>
+          <p><strong>Amber Total:</strong> {{ item.amber }}</p>
+          <p><strong>Red Total:</strong> {{ item.red }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+
+<!-- Always include scripts outside of report-container -->
+{{ labels|json_script:"labels-data" }}
+{{ green_counts|json_script:"green-data" }}
+{{ amber_counts|json_script:"amber-data" }}
+{{ red_counts|json_script:"red-data" }}
+
+<script>
+{% if show_chart %}
+  const labels = JSON.parse(document.getElementById('labels-data').textContent);
+  const greenData = JSON.parse(document.getElementById('green-data').textContent);
+  const amberData = JSON.parse(document.getElementById('amber-data').textContent);
+  const redData = JSON.parse(document.getElementById('red-data').textContent);
+
+  const chartElement = document.getElementById('departmentChart');
+  if (chartElement) {
+    const ctx = chartElement.getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Green',
+            data: greenData,
+            backgroundColor: 'rgba(0, 128, 0, 0.7)'
+          },
+          {
+            label: 'Amber',
+            data: amberData,
+            backgroundColor: 'rgba(255, 165, 0, 0.7)'
+          },
+          {
+            label: 'Red',
+            data: redData,
+            backgroundColor: 'rgba(255, 0, 0, 0.7)'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 10,
+            ticks: {
+              stepSize: 1
+            },
+            title: {
+              display: true,
+              text: 'Vote Count'
+            }
+          }
+        }
+      }
+    });
+  }
+{% endif %}
+</script>
+
+
+
+
+</body>
+</html>
