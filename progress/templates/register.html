@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Health Check - Sign Up</title>
+    <link rel="stylesheet" href="{% static 'users/css/styles.css' %}">
+</head>
+<body>
+
+    <div class="container">
+        <div class="sky-health-image">
+       <img src="{% static 'users/img/sky health.png' %}" alt="Sky Health Logo">
+        </div>
+        
+        <div class="form-container">
+            <h1>Register Account</h1>
+            
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}  
+                <button type="submit">Register</button>
+            
+
+                <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+        </div>
+    </div>
+
+    <script src="{% static 'users/js/script.js' %}"></script>
+</body>
+</html>

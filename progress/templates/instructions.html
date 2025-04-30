@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sky Health Check - Instructions</title>
+    <link rel="stylesheet" href="{% static 'users/css/style.css' %}">
+</head>
+<body>
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'login' %}">Login</a>
+        {% if request.user.role == 'DepartmentLeader' or request.user.role == 'SeniorManager' %}
+        <a href="{% url 'department_summaries' %}">Department Summaries</a>
+    {% endif %}
+    </nav>
+
+<div class="top-bar">
+    <h1>Sky Health Check</h1>
+</div>
+
+<div class="main-container">
+
+    <div class="instructions">
+        <h2>Instructions</h2>
+
+        <div class="instruction-box">
+            Click on the traffic light to indicate your team's health status.<br><br>
+            - Red: Serious issues<br>
+            - Yellow: Some concerns<br>
+            - Green: All good<br>
+        </div>
+
+        <div class="instruction-box">
+            After selecting, press Proceed to save your status.
+        </div>
+
+    </div>
+
+    <div class="state-selector">
+        <h2>Choose Your State</h2>
+
+        <div class="traffic-light">
+            <div class="light red" onclick="selectLight('red')"></div>
+            <div class="light yellow" onclick="selectLight('yellow')"></div>
+            <div class="light green" onclick="selectLight('green')"></div>
+        </div>
+
+        <div class="proceed-container">
+            <button class="proceed-button">Proceed</button>
+        </div>
+
+    </div>
+
+</div>
+
+<img src="{% static 'users/img/sky health.png' %}" alt="Sky Logo" class="floating-logo">
+
+<script src="{% static 'users/js/scripts.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Department Summaries</title>
+    <link rel="stylesheet" href="{% static 'users/css/styless.css' %}">
+</head>
+<body>
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'instructions' %}">Instructions</a>
+    </nav>
+    <header>
+        <button class="nav-btn">&#9664;</button>
+        <h1>View Department Summaries</h1>
+        <button class="nav-btn">&#9654;</button>
+    </header>
+    <img src="{% static 'users/img/sky health.png' %}" alt="Sky Health Logo" class="floating-logo">
+
+    <main class="cards-container">
+        <div class="card" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front">
+                    Department 1
+                </div>
+                <div class="card-back">
+                    <p>Department 1 is doing amazing.</p>
+                </div>
+            </div>
+        </div>
+        <div class="card" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front">
+                    Department 2
+                </div>
+                <div class="card-back">
+                    <p>Department 2 is doing fantanstic.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{% static 'users/js/scriptss.js' %}"></script>
+</body>
+</html>
