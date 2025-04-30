@@ -1,0 +1,120 @@
+/* General Reset */ 
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+} 
+
+body { 
+    font-family: Arial, sans-serif; 
+    background: linear-gradient(135deg, #005b96, #003366); /* More prominent gradient */
+    color: #333; 
+    line-height: 1.6; 
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Center everything vertically and horizontally */
+} 
+
+.container { 
+    width: 100%; 
+    max-width: 700px; /* Increased max width to make form take up more space */
+    margin: 0 auto; 
+    padding: 20px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+} 
+
+.sky-health-image img {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+.sky-logo {
+    background-image: linear-gradient(90deg, rgb(0, 50, 255), rgb(0, 102, 204), rgb(0, 153, 255)); /* Blue gradient */
+    color: transparent;
+    background-clip: text;
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px; /* Move logo up */
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.form-container {
+    background-color: #ffffff; 
+    padding: 40px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    color: #333;
+    width: 100%;
+    max-width: 600px; /* Adjusted to cover more of the page */
+    height: auto; /* Allow the form container to grow with content */
+}
+
+h1 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    color: #007BFF; /* Blue color for "Register Account" */
+}
+
+input[type="text"], input[type="email"], input[type="password"] { 
+    width: 100%; 
+    padding: 15px;
+    margin-bottom: 20px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    transition: border-color 0.3s ease;
+} 
+
+input:focus {
+    border-color: #007BFF; /* Change border color on focus */
+}
+
+button { 
+    background-color: #007BFF; 
+    color: white; 
+    border: none; 
+    padding: 15px 30px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+    transition: background-color 0.3s ease;
+} 
+
+button:hover { 
+    background-color: #0056b3; 
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.login-link {
+    color: #007BFF;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+/* Error Styling */
+input.error {
+    border-color: #e74c3c;
+}
+
+input.success {
+    border-color: #2ecc71;
+}
+

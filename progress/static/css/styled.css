@@ -1,0 +1,91 @@
+/* login html */
+/* General styles */
+body {
+    background-color: #004d6e; /* Dark blue background */
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #0073e6; /* Light blue links */
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #ffa500; /* Change color on hover */
+}
+
+/* Centered login container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-form {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    width: 350px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: #00579c;
+}
+
+/* Footer for links */
+.login-footer {
+    margin-top: 20px;
+}
+
+.login-footer a {
+    font-size: 14px;
+    margin: 0 10px;
+    display: inline-block;
+}
+
+.logo-container {
+    text-align: center; /* Align logo to the center */
+    margin-bottom: 20px; /* Add space between the logo and the form */
+}
+
+.logo {
+    width: 200px; /* Adjust logo size */
+    height: auto;
+}
